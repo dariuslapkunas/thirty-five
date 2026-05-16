@@ -1,0 +1,13 @@
+# Query: const PLAYLIST_ID = 'PLjp0AEEJ0-fGKG_3skl0e1FQlJfnx-TJz';
+# ContextLines: 1
+
+2 results - 2 files
+
+src/App.jsx:
+  5  
+  6: const PLAYLIST_ID = 'PLVE-SETlYfQdCCv9cMRteaKW1oyk4cFkm&si=ZRiQGWMGRxjd1uhq;
+  7  
+
+thirty-five-code/src/App.jsx:
+  5  
+  6: const PLAYLIST_ID = 'PLjp0AEEJ0-fGKG_3skl0e1FQlJfnx-TJz';
