@@ -82,7 +82,8 @@ img { display: block; }
   font-size: 18px; color: #fff; flex-shrink: 0;
 }
 .bar-info { display: flex; flex-direction: column; gap: 2px; }
-.bar-song { font-size: 13px; font-weight: 400; color: #fff; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.<span className="bar-song">{songName}</span>
+<span className="bar-artist">Ed Sheeran & more</span> { font-size: 13px; font-weight: 400; color: #fff; }
 .bar-artist { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
 
 /* PLAYER CONTROLS */
@@ -91,34 +92,40 @@ img { display: block; }
   width: 1px; height: 1px; overflow: hidden;
   opacity: 0; position: absolute; pointer-events: none;
 }
-.bar-controls { display: flex; align-items: center; gap: 8px; }
+.bar-controls { display: flex; align-items: center; gap: 10px; }
 .bar-btn {
   width: 34px; height: 34px; border-radius: 50%;
   color: rgba(255,255,255,0.8); font-size: 14px;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.2s; border: 1px solid rgba(255,255,255,0.15);
 }
-.bar-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
-.bar-btn-play {
-  background: #fff !important; color: #000 !important;
-  border-color: #fff !important; font-size: 12px; padding-left: 2px;
-}
-.bar-btn-play:hover { background: #f0f0f0 !important; transform: scale(1.05); }
-.volume-wrap { display: flex; align-items: center; gap: 8px; margin-left: 4px; }
-.volume-icon { font-size: 15px; }
+.bar-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+.bar-btn-pause { font-size: 12px; }
+
+/* VOLUME */
+.volume-wrap { display: flex; align-items: center; gap: 8px; margin-left: 6px; }
+.volume-icon { font-size: 16px; }
 .volume-slider {
   -webkit-appearance: none; appearance: none;
   width: 80px; height: 3px;
-  background: rgba(255,255,255,0.2); border-radius: 2px; outline: none; cursor: pointer;
+  background: rgba(255,255,255,0.2); border-radius: 2px; outline: none;
+  cursor: pointer;
 }
 .volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 12px; height: 12px;
-  border-radius: 50%; background: #fff; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; cursor: pointer;
 }
+.volume-slider::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; cursor: pointer; border: none;
+}
+
 .bar-right {}
 .bar-scroll {
   font-size: 9px; letter-spacing: 0.35em; color: rgba(255,255,255,0.4);
-  font-family: 'Montserrat', sans-serif; font-weight: 700; transition: color 0.2s;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  transition: color 0.2s;
 }
 .bar-scroll:hover { color: #fff; }
 
@@ -152,7 +159,8 @@ img { display: block; }
 .letter-photo-wrap { position: relative; display: inline-block; }
 .letter-photo {
   width: 100%; max-width: 380px; border-radius: 4px;
-  object-fit: cover; aspect-ratio: 3/4; filter: grayscale(20%);
+  object-fit: cover; aspect-ratio: 3/4;
+  filter: grayscale(20%);
 }
 .flower-svg {
   position: absolute; right: -50px; bottom: -20px;
@@ -173,10 +181,6 @@ img { display: block; }
   font-weight: 300; line-height: 1.15; color: #fff;
   margin-top: 0.75rem;
 }
-.memories-sub {
-  font-size: 11px; letter-spacing: 0.25em; color: rgba(255,255,255,0.25);
-  margin-top: 0.75rem; font-family: 'Montserrat', sans-serif;
-}
 .memories-strip {
   display: flex; gap: 8px; overflow-x: auto;
   width: 100%; max-width: 1100px; padding-bottom: 8px;
@@ -191,31 +195,14 @@ img { display: block; }
 .memory-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .memory-item:hover .memory-img { transform: scale(1.05); }
 .memory-overlay {
-  position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.4);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity 0.3s;
   font-size: 11px; letter-spacing: 0.3em; color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
 .memory-item:hover .memory-overlay { opacity: 1; }
-
-/* +more card */
-.memory-more {
-  flex: 0 0 200px; height: 260px; border-radius: 6px;
-  border: 1px dashed rgba(255,255,255,0.2);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 0.5rem; cursor: pointer; transition: border-color 0.2s, background 0.2s;
-}
-.memory-more:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.04); }
-.memory-more-num {
-  font-family: 'Montserrat', sans-serif; font-weight: 900;
-  font-size: 36px; color: rgba(255,255,255,0.4);
-}
-.memory-more-label {
-  font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.3);
-  text-align: center; line-height: 1.6;
-}
-
 .download-btn {
   padding: 14px 36px; border-radius: 40px;
   border: 1px solid rgba(255,255,255,0.3);
@@ -223,12 +210,7 @@ img { display: block; }
   font-family: 'Montserrat', sans-serif; font-weight: 700;
   color: #fff; transition: all 0.25s;
 }
-.download-btn:hover:not(:disabled) { background: #fff; color: #111; border-color: #fff; }
-.download-btn:disabled { opacity: 0.5; cursor: wait; }
-.download-note {
-  font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 0.75rem;
-  text-align: center; letter-spacing: 0.05em;
-}
+.download-btn:hover { background: #fff; color: #111; border-color: #fff; }
 
 /* MUSIC */
 .music-section {
@@ -246,7 +228,7 @@ img { display: block; }
   font-weight: 300; line-height: 1.15; color: #1a1a1a;
 }
 .music-desc { font-size: 15px; font-weight: 300; line-height: 2; color: #4a4a4a; font-style: italic; }
-.music-cta { font-size: 17px; color: #1a1a1a; }
+.music-cta { font-size: 17px; color: #1a1a1a; font-family: 'Cormorant Garamond', serif; }
 .music-right { width: 100%; }
 .yt-card {
   border-radius: 16px; overflow: hidden;
@@ -281,12 +263,12 @@ img { display: block; }
 /* MOBILE */
 @media (max-width: 768px) {
   .hero-title { font-size: clamp(70px, 22vw, 120px); }
-  .hero-bar { padding: 0.8rem 1.2rem; gap: 0.5rem; }
+  .hero-bar { padding: 0.8rem 1.2rem; gap: 0.75rem; }
   .bar-scroll { display: none; }
   .volume-wrap { display: none; }
   .letter-inner, .music-inner { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; }
   .letter-photo { max-width: 100%; }
   .flower-svg { display: none; }
   .memories-section { padding: 4rem 1.2rem; }
-  .memory-item, .memory-more { flex: 0 0 160px; height: 210px; }
+  .memory-item { flex: 0 0 160px; height: 210px; }
 }

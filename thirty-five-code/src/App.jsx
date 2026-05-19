@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import YouTube from 'react-youtube';
 import './App.css';
 
-const PLAYLIST_ID = 'PLVE-SETlYfQdCCv9cMRteaKW1oyk4cFkm';
+const VIDEO_ID = 'JGwWNGJdvx8';
 
 const galleryImages = [
   { id: 1, src: '/images/gallery/memory1.jpg', label: 'Then' },

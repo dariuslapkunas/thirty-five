@@ -24,7 +24,7 @@ const ALL_PHOTOS = [
 const PREVIEW_COUNT = 5; // how many show in the gallery strip
 
 // YouTube playlist ID — autoplay works best with a playlist
-const PLAYLIST_ID = 'PLVE-SETlYfQdCCv9cMRteaKW1oyk4cFkm';
+const PLAYLIST_ID = 'PLjp0AEEJ0-fGKG_3skl0e1FQlJfnx-TJz';
 
 function FadeIn({ children, delay = 0, className = '' }) {
   const ref = useRef(null);
@@ -161,7 +161,8 @@ export default function App() {
           <div className="bar-left">
             <div className="bar-thumb">♪</div>
             <div className="bar-info">
-              <span className="bar-song">{songName}</span>
+              <span className="<span className="bar-song">{songName}</span>
+<span className="bar-artist">Ed Sheeran & more</span>">{songName}</span>
               <span className="bar-artist">Ed Sheeran & more</span>
             </div>
           </div>

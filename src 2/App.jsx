@@ -1,30 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import YouTube from 'react-youtube';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
 import './App.css';
 
-// ── Add ALL your photos here (up to 30) ──
-// Preview shows first 5, all get included in the zip download
-const ALL_PHOTOS = [
-  '/images/gallery/memory1.jpg',
-  '/images/gallery/memory2.jpg',
-  '/images/gallery/memory3.jpg',
-  '/images/gallery/memory4.jpg',
-  '/images/gallery/memory5.jpg',
-  '/images/gallery/memory6.jpg',
-  '/images/gallery/memory7.jpg',
-  '/images/gallery/memory8.jpg',
-  '/images/gallery/memory9.jpg',
-  '/images/gallery/memory10.jpg',
-  // add more lines here: '/images/gallery/memory11.jpg', etc.
+const VIDEO_ID = 'JGwWNGJdvx8';
+
+const galleryImages = [
+  { id: 1, src: '/images/gallery/memory1.jpg' },
+  { id: 2, src: '/images/gallery/memory2.jpg' },
+  { id: 3, src: '/images/gallery/memory3.jpg' },
+  { id: 4, src: '/images/gallery/memory4.jpg' },
+  { id: 5, src: '/images/gallery/memory5.jpg' },
 ];
-
-const PREVIEW_COUNT = 5; // how many show in the gallery strip
-
-// YouTube playlist ID — autoplay works best with a playlist
-const PLAYLIST_ID = 'PLVE-SETlYfQdCCv9cMRteaKW1oyk4cFkm';
 
 function FadeIn({ children, delay = 0, className = '' }) {
   const ref = useRef(null);
@@ -45,9 +32,8 @@ function FadeIn({ children, delay = 0, className = '' }) {
 export default function App() {
   const [lightbox, setLightbox] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(80);
-  const [downloading, setDownloading] = useState(false);
-  const [songName, setSongName] = useState('Her Playlist');
   const playerRef = useRef(null);
 
   const scrollTo = (id) => {
@@ -58,21 +44,19 @@ export default function App() {
   const handlePlayerReady = (e) => {
     playerRef.current = e.target;
     e.target.setVolume(volume);
-    // autoplay starts automatically via playerVars
+    e.target.playVideo();
+    setIsPlaying(true);
   };
 
-  const handleStateChange = (e) => {
-    // Update song name when track changes
-    try {
-      const data = e.target.getVideoData();
-      if (data?.title) setSongName(data.title);
-    } catch (_) {}
+  const handlePlay = () => {
+    playerRef.current?.playVideo();
+    setIsPlaying(true);
   };
 
-  const handlePlay = () => playerRef.current?.playVideo();
-  const handlePause = () => playerRef.current?.pauseVideo();
-  const handleNext = () => playerRef.current?.nextVideo();
-  const handlePrev = () => playerRef.current?.previousVideo();
+  const handlePause = () => {
+    playerRef.current?.pauseVideo();
+    setIsPlaying(false);
+  };
 
   const handleVolumeChange = (e) => {
     const v = Number(e.target.value);
@@ -80,32 +64,18 @@ export default function App() {
     playerRef.current?.setVolume(v);
   };
 
-  // Download all photos as a single zip file
-  const handleDownloadZip = async () => {
-    setDownloading(true);
-    try {
-      const zip = new JSZip();
-      const folder = zip.folder('Loreta_Memories');
-
-      const fetches = ALL_PHOTOS.map(async (src, i) => {
-        try {
-          const res = await fetch(src);
-          const blob = await res.blob();
-          const ext = src.split('.').pop();
-          folder.file(`memory${i + 1}.${ext}`, blob);
-        } catch (_) {}
-      });
-
-      await Promise.all(fetches);
-      const content = await zip.generateAsync({ type: 'blob' });
-      saveAs(content, 'Loreta_35_Memories.zip');
-    } catch (err) {
-      console.error('Zip failed:', err);
-    }
-    setDownloading(false);
+  const handleDownloadAll = () => {
+    galleryImages.forEach((img, i) => {
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = img.src;
+        a.download = `memory${i + 1}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, i * 600);
+    });
   };
-
-  const previewPhotos = ALL_PHOTOS.slice(0, PREVIEW_COUNT);
 
   return (
     <div className="app">
@@ -161,34 +131,29 @@ export default function App() {
           <div className="bar-left">
             <div className="bar-thumb">♪</div>
             <div className="bar-info">
-              <span className="bar-song">{songName}</span>
-              <span className="bar-artist">Ed Sheeran & more</span>
+              <span className="<span className="bar-song">{songName}</span>
+<span className="bar-artist">Ed Sheeran & more</span>">Shape of You</span>
+              <span className="bar-artist">Ed Sheeran</span>
             </div>
           </div>
 
           <div className="bar-center">
-            {/* Hidden autoplay YouTube player */}
+            {/* Hidden autoplay player */}
             <div className="yt-hidden">
               <YouTube
+                videoId={VIDEO_ID}
                 opts={{
                   width: '1', height: '1',
-                  playerVars: {
-                    listType: 'playlist',
-                    list: PLAYLIST_ID,
-                    autoplay: 1,
-                    rel: 0,
-                    loop: 1,
-                  },
+                  playerVars: { autoplay: 1, rel: 0, loop: 1, playlist: VIDEO_ID },
                 }}
                 onReady={handlePlayerReady}
-                onStateChange={handleStateChange}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
               />
             </div>
             <div className="bar-controls">
-              <button className="bar-btn" onClick={handlePrev} title="Previous">⏮</button>
-              <button className="bar-btn bar-btn-play" onClick={handlePlay} title="Play">▶</button>
-              <button className="bar-btn" onClick={handlePause} title="Pause">⏸</button>
-              <button className="bar-btn" onClick={handleNext} title="Next">⏭</button>
+              <button className="bar-btn" onClick={handlePlay} title="Play">▶</button>
+              <button className="bar-btn bar-btn-pause" onClick={handlePause} title="Pause">⏸</button>
               <div className="volume-wrap">
                 <span className="volume-icon">🔉</span>
                 <input
@@ -250,31 +215,22 @@ export default function App() {
           <div className="memories-header">
             <span className="eyebrow light">Our Memories</span>
             <h2 className="memories-heading">Moments that<br />mean everything.</h2>
-            <p className="memories-sub">{ALL_PHOTOS.length} photos · showing {PREVIEW_COUNT} preview</p>
           </div>
         </FadeIn>
         <FadeIn delay={0.15}>
           <div className="memories-strip">
-            {previewPhotos.map((src, i) => (
-              <div key={i} className="memory-item" onClick={() => setLightbox(src)}>
-                <img src={src} alt={`Memory ${i + 1}`} className="memory-img" />
+            {galleryImages.map(img => (
+              <div key={img.id} className="memory-item" onClick={() => setLightbox(img.src)}>
+                <img src={img.src} alt="Memory" className="memory-img" />
                 <div className="memory-overlay">View</div>
               </div>
             ))}
-            {/* +more indicator */}
-            {ALL_PHOTOS.length > PREVIEW_COUNT && (
-              <div className="memory-more" onClick={handleDownloadZip}>
-                <span className="memory-more-num">+{ALL_PHOTOS.length - PREVIEW_COUNT}</span>
-                <span className="memory-more-label">more photos<br />in download</span>
-              </div>
-            )}
           </div>
         </FadeIn>
         <FadeIn delay={0.3}>
-          <button className="download-btn" onClick={handleDownloadZip} disabled={downloading}>
-            {downloading ? '⏳ Preparing zip...' : '↓ \u00a0 DOWNLOAD ALL MEMORIES'}
+          <button className="download-btn" onClick={handleDownloadAll}>
+            ↓ &nbsp;&nbsp; DOWNLOAD ALL MEMORIES
           </button>
-          <p className="download-note">Downloads all {ALL_PHOTOS.length} photos as a single zip file</p>
         </FadeIn>
       </section>
 
@@ -295,15 +251,10 @@ export default function App() {
           <FadeIn delay={0.2} className="music-right">
             <div className="yt-card">
               <YouTube
+                videoId={VIDEO_ID}
                 opts={{
                   width: '100%', height: '100%',
-                  playerVars: {
-                    listType: 'playlist',
-                    list: PLAYLIST_ID,
-                    autoplay: 0,
-                    rel: 0,
-                    modestbranding: 1,
-                  },
+                  playerVars: { autoplay: 0, rel: 0, modestbranding: 1 },
                 }}
                 className="yt-player"
               />

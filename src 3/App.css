@@ -82,7 +82,8 @@ img { display: block; }
   font-size: 18px; color: #fff; flex-shrink: 0;
 }
 .bar-info { display: flex; flex-direction: column; gap: 2px; }
-.bar-song { font-size: 13px; font-weight: 400; color: #fff; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.<span className="bar-song">{songName}</span>
+<span className="bar-artist">Ed Sheeran & more</span> { font-size: 13px; font-weight: 400; color: #fff; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar-artist { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
 
 /* PLAYER CONTROLS */
