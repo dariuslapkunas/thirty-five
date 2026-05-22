@@ -67,9 +67,9 @@ const ALL_PHOTOS = [
   '/images/gallery/memory54.jpeg',
   '/images/gallery/memory55.jpeg',
   '/images/gallery/memory56.jpeg',
-  '/images/gallery/memory57.jpeg',
-  '/images/gallery/memory58.jpeg',
-  '/images/gallery/memory59.jpeg',
+  '/images/gallery/memory57.mp4',
+  '/images/gallery/memory58.mp4',
+  '/images/gallery/memory59.mp4',
 ];
 
 function FadeIn({ children, delay = 0, className = '' }) {

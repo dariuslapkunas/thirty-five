@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import YouTube from 'react-youtube';
 import './App.css';
 
-const VIDEO_ID = 'JGwWNGJdvx8';
+const PLAYLIST_ID = 'PLjp0AEEJ0-fGKG_3skl0e1FQlJfnx-TJz';
 
 const galleryImages = [
   { id: 1, src: '/images/gallery/memory1.jpg', label: 'Then' },
@@ -244,4 +244,65 @@ export default function App() {
       )}
     </div>
   );
-}
+}export const ALL_PHOTOS = [
+  '/images/gallery/memory1.jpeg',
+  '/images/gallery/memory2.jpeg',
+  '/images/gallery/memory3.jpeg',
+  '/images/gallery/memory4.jpeg',
+  '/images/gallery/memory5.jpeg',
+  '/images/gallery/memory6.jpeg',
+  '/images/gallery/memory7.jpeg',
+  '/images/gallery/memory8.jpeg',
+  '/images/gallery/memory9.jpeg',
+  '/images/gallery/memory10.jpeg',
+  '/images/gallery/memory11.jpeg',
+  '/images/gallery/memory12.jpeg',
+  '/images/gallery/memory13.jpeg',
+  '/images/gallery/memory14.jpeg',
+  '/images/gallery/memory15.jpeg',
+  '/images/gallery/memory16.jpeg',
+  '/images/gallery/memory17.jpeg',
+  '/images/gallery/memory18.jpeg',
+  '/images/gallery/memory19.jpeg',
+  '/images/gallery/memory20.jpeg',
+  '/images/gallery/memory21.jpeg',
+  '/images/gallery/memory22.jpeg',
+  '/images/gallery/memory23.jpeg',
+  '/images/gallery/memory24.jpeg',
+  '/images/gallery/memory25.jpeg',
+  '/images/gallery/memory26.jpeg',
+  '/images/gallery/memory27.jpeg',
+  '/images/gallery/memory28.jpeg',
+  '/images/gallery/memory29.jpeg',
+  '/images/gallery/memory30.jpeg',
+  '/images/gallery/memory31.jpeg',
+  '/images/gallery/memory32.jpeg',
+  '/images/gallery/memory33.jpeg',
+  '/images/gallery/memory34.jpeg',
+  '/images/gallery/memory35.jpeg',
+  '/images/gallery/memory36.jpeg',
+  '/images/gallery/memory37.jpeg',
+  '/images/gallery/memory38.jpeg',
+  '/images/gallery/memory39.jpeg',
+  '/images/gallery/memory40.jpeg',
+  '/images/gallery/memory41.jpeg',
+  '/images/gallery/memory42.jpeg',
+  '/images/gallery/memory43.jpeg',
+  '/images/gallery/memory44.jpeg',
+  '/images/gallery/memory45.jpeg',
+  '/images/gallery/memory46.jpeg',
+  '/images/gallery/memory47.jpeg',
+  '/images/gallery/memory48.jpeg',
+  '/images/gallery/memory49.jpeg',
+  '/images/gallery/memory50.jpeg',
+  '/images/gallery/memory51.jpeg',
+  '/images/gallery/memory52.jpeg',
+  '/images/gallery/memory53.jpeg',
+  '/images/gallery/memory54.jpeg',
+  '/images/gallery/memory55.jpeg',
+  '/images/gallery/memory56.jpeg',
+  '/images/gallery/memory57.mp4',
+  '/images/gallery/memory58.mp4',
+  '/images/gallery/memory59.mp4',
+];
+
