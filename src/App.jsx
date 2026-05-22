@@ -123,7 +123,7 @@ export default function App() {
         try {
           const res = await fetch(src);
           const blob = await res.blob();
-          folder.file(`memory${i + 1}.jpeg`, blob);
+          folder.file(src.split('/').pop(), blob);
         } catch (_) {}
       });
       await Promise.all(fetches);
